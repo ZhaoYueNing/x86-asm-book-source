@@ -3,3 +3,6 @@
 *.lst
 *.img
 *.swp
+*.img.lock
+*.disk
+bochsout.txt

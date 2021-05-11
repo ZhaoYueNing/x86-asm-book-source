@@ -102,6 +102,7 @@ mov byte [es:0x25],0x07
 
 infi: jmp near infi                 ;无限循环
 
+; db 占用一个字节数据
 number db 0,0,0,0,0
 
 times 203 db 0
