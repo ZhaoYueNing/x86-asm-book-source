@@ -1,7 +1,9 @@
-
-ASMFILE=c05_mbr.asm
-
-all:$(ASMFILE)
-	nasm -f bin $(ASMFILE) -o mbr.bin
-	-rm myfile.vhd
-	VBoxManage convertfromraw mbr.bin myfile.vhd --format VHD
+mbr.bin: *.asm
+	- rm mbr.bin
+	nasm -o mbr.bin $^
+hd60M.img: mbr.bin
+	- rm hd60M.img
+	bximage -hd=60M -mode="create" -q hd60M.img
+	dd if=mbr.bin of=hd60M.img bs=512 count=1 conv=notrunc
+run: hd60M.img
+	bochs -f bochsrc.disk

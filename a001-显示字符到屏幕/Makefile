@@ -1,6 +1,6 @@
-mbr.bin: mbr.S
+mbr.bin: *.S
 	- rm mbr.bin
-	nasm -o mbr.bin mbr.S
+	nasm -o mbr.bin $^
 hd60M.img: mbr.bin
 	- rm hd60M.img
 	bximage -hd=60M -mode="create" -q hd60M.img
