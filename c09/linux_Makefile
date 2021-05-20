@@ -1,0 +1,8 @@
+all:c08_mbr.asm c09_1.asm
+	nasm -f bin c08_mbr.asm -o c08_mbr.bin
+	nasm -f bin c09_1.asm -o c09_1.bin
+	-rm myfile.vhd
+	dd if=/dev/zero of=mbr.img count=10000
+	dd if=c08_mbr.bin of=mbr.img conv=notrunc
+	dd if=c09_1.bin of=mbr.img seek=100  conv=notrunc
+	bochs -f bochsrc.disk
